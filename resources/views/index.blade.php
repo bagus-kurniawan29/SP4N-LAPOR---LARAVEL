@@ -21,15 +21,15 @@
             <li><a href="#">Layanan</a></li>
         </ul>
         <button>
-            <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-600 font-bold">Masuk</a>
+            <a href="{{ route('login') }}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-600 font-bold">Masuk</a>
         </button>
     </nav>
 </header>
 <body>
     {{-- Hero --}}
     <section class="text-center mt-16 px-6 mx-auto items-center relative">
-    <div class="absolute -top-10 left-10 h-64 w-64 rounded-full bg-yellow-500/20 blur-[80px]"></div>
-    <div class="absolute bottom-0 right-10 h-80 w-80 rounded-full bg-blue-600/20 blur-[80px]"></div>
+    <div class="absolute -top-10 left-5 md:left-10 h-64 w-64 rounded-full bg-yellow-500/20 blur-[80px]"></div>
+    <div class="absolute bottom-0 right-5 md:right-10 h-80 w-80 rounded-full bg-blue-600/20 blur-[80px]"></div>
         <div class="max-w-4xl mx-auto space-y-11">
             <h1 class="text-6xl font-bold mb-4">
                 Sistem Pengelolaan Pengaduan Pelayanan Publik Nasional (SP4N) - <span class="text-blue-800">Provinsi NTB</span>
@@ -52,7 +52,7 @@
         </div>
         <div class="text-center p-8 mx-auto flex flex-col items-center">
             <h1 class="text-4xl font-bold text-blue-700">20</h1>
-            <p class="text-gray-600">Instansi Terlibat</p>
+            <p class="text-gray-600">Instansi <br>Terlibat</p>
         </div>
         <div class="text-center p-8 mx-auto flex flex-col items-center">
             <h1 class="text-4xl font-bold text-blue-700">98%</h1>
