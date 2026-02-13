@@ -18,6 +18,6 @@ Route::get('/laporan', function () {
 Route::get('/laporan_saya', function () {
     return view('laporan_saya');
 })->name('laporan_saya');
-Route::get('/laporan/detail/{id}', function ($id) {
-    return view('laporan_detail', ['id' => $id]);
+Route::get('/laporan/detail', function () {
+    return view('laporan_detail');
 })->name('laporan.detail');
