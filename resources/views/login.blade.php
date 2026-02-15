@@ -29,23 +29,26 @@
     <div class="absolute  bg-linear-to-r h-80 w-100 from-blue-600 to-blue-900 -skew-y-6 sm:skew-y-0 sm:rotate-6 rounded-3xl shadow-lg"></div>
     <div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-md text-center relative z-10">
         <h1 class="text-2xl font-bold mb-6">Masuk</h1>
-        <input type="email" id="email" class="w-full p-2 border rounded mb-4 border-gray-400 focus:outline-blue-600" placeholder="Username">
+        <form method="POST" action="{{ url('/login')}}">
+            @csrf
+        <input type="email" id="email" class="w-full p-2 border rounded mb-4 border-gray-400 focus:outline-blue-600" placeholder="Email" name="email">
         <input type="password" id="password" placeholder="Password" class="w-full p-2 border rounded border-gray-400 focus:outline-blue-600 pr-10 mb-4">
         <button type="button" id="toggleMain" class="absolute right-10 top-1/2 -translate-y-1/3 text-gray-500 cursor-pointer focus:outline-none">
         <i class="fa-regular fa-eye-slash" id="eyeIconMain"></i>
         </button>
-        <button class="bg-blue-600 text-white px-4 py-2 rounded font-bold hover:bg-blue-700 w-full transition-colors">
+        <button class="bg-blue-600 text-white px-4 py-2 rounded font-bold hover:bg-blue-700 w-full transition-colors" type="submit">
             Masuk
         </button>
         <p class="mt-5">Belum punya akun? <a href="{{ route('register') }}" class="text-blue-600 hover:underline font-semibold">Daftar</a></p>
     </div>
 </section>
+
 </body>
 </html>
 
 <script>
     const passInput = document.getElementById('password');
-    const confirmInput = document.getElementById('Confirmpassword'); // Bisa null kalau di hal. Login
+    const confirmInput = document.getElementById('Confirmpassword');
     const iconMain = document.getElementById('eyeIconMain');
     const toggleMain = document.getElementById('toggleMain');
 
