@@ -29,17 +29,13 @@ public function register(Request $request)
 //Login
 public function login(Request $request)
 {
-    $request->validate([
-        'email' => 'required|string|email',
-        'password' => 'required|string',
+    $credentials = $request->validate([
+        'email' => 'required|email',
+        'password' => 'required',
     ]);
-    $user = User::where('email', $request->email)->first();
-    if (!$user || !Hash::check($request->password, $user->password))
-    {
-        return back()->withErrors([
-            'email' => 'Email atau password salah.',
-        ]);
+    if (Auth::attempt($credentials)) {
+        $request->session()->regenerate();
+        return redirect()->intended('/laporan'); 
     }
-    auth()->login($user);
-    return redirect()->route('form_laporan');
+    return back()->with('error', 'Email atau Password salah! Silakan coba lagi.');
 }}

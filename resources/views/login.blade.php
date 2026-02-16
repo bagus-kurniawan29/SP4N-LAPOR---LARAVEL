@@ -42,7 +42,12 @@
         <p class="mt-5">Belum punya akun? <a href="{{ route('register') }}" class="text-blue-600 hover:underline font-semibold">Daftar</a></p>
     </div>
 </section>
+    @extends('layouts.app')
 
+@section('content')
+<section class="flex-1 flex items-center justify-center p-8 w-full min-h-screen bg-gray-100 relative overflow-hidden">
+    </section>
+@endsection
 </body>
 </html>
 

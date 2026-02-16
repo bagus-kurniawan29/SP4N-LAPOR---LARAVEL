@@ -19,7 +19,7 @@ Route::post('/register', [AuthController::class, 'register']);
 
 Route::get('/laporan', function () {
     return view('laporan');
-})->name('form_laporan');
+})->middleware('auth');
 
 Route::get('/laporan_saya', function () {
     return view('laporan_saya');
