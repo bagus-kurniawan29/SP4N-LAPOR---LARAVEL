@@ -9,46 +9,64 @@
     @vite('resources/css/app.css')
 </head>
 <header >
-    <nav class="bg-white text-black p-4 shadow-md">
-        <ul class="flex space-x-50 justify-center">
-            <a href="{{ route('form_laporan') }}"><li class="font-semibold text-gray-500">Buat Laporan</li></a>
-            <li class="font-bold text-blue-400">Laporan Saya</li>
+        <nav class="bg-white text-black p-4 shadow-md">
+    <div class="max-w-6xl mx-auto flex items-center justify-between">
+        <a href="{{ route('home') }}" class="hover:opacity-70 transition-opacity">
+            <i class="fa-solid fa-arrow-left text-xl text-blue-600"></i>
+        </a>
+        <ul class="flex items-center space-x-8 md:space-x-12">
+            <li>
+                <a href="{{ route('laporan') }}" class="font-semibold text-gray-500 hover:text-blue-400 transition-colors">
+                    Buat Laporan
+                </a>
+            </li>
+            <li>
+                <a href="#" class="font-semibold text-blue-600 ">
+                    Laporan Saya
+                </a>
+            </li>
         </ul>
+        <div class="w-6 hidden md:block"></div>
+    </div>
 </nav>
 </header>
 <body class="bg-gray-100">
     <h1 class="text-6xl font-bold text-center mt-15">Lihat Laporan anda</h1>
 
-    <div class="bg-white max-w-7xl mx-auto mt-10 p-8 rounded-lg shadow-md mb-5">
+    <div class="bg-white max-w-7.5xl mx-auto mt-10 p-8 rounded-lg shadow-md mb-5">
         <table class="min-w-full border-collapse block md:table">
             <thead>
                 <tr class="border border-gray-300 md:border-none block md:table-row absolute -top-full md:top-auto -left-full md:left-auto md:relative">
                         <th class="bg-gray-200 p-2 text-gray-700 font-bold md:border md:border-gray-300 text-left block md:table-cell">Tanggal Pelaporan</th>
+                        <th class="bg-gray-200 p-2 text-gray-700 font-bold md:border md:border-gray-300 text-left block md:table-cell">Alamat Pelaporan</th>
                         <th class="bg-gray-200 p-2 text-gray-700 font-bold md:border md:border-gray-300 text-left block md:table-cell w-1/3">Isi Laporan</th>
                         <th class="bg-gray-200 p-2 text-gray-700 font-bold md:border md:border-gray-300 text-left block md:table-cell">Status</th>
                         <th class="bg-gray-200 p-2 text-gray-700 font-bold md:border md:border-gray-300 text-left block md:table-cell">Gambar Bukti</th>
                         <th class="bg-gray-200 p-2 text-gray-700 font-bold md:border md:border-gray-300 text-left block md:table-cell">Aksi</th>
                     </tr>
             </thead>
-<tbody class="block md:table-row-group">
-                    
+            @foreach ($laporans as $item)
+        <tbody class="block md:table-row-group">
                     <tr class="bg-white border border-gray-300 md:border-none block md:table-row hover:bg-gray-50 transition duration-150">
-                        
                         <td class="p-2 md:border md:border-gray-300 text-left block md:table-cell">
                             <span class="md:hidden font-bold text-blue-600">Tanggal: </span>
-                            17 January 2026
+                            {{ \Carbon\Carbon::parse($item->date)->format('d M Y, H:i') }}
+                        </td>
+                        <td class="p-2 md:border md:border-gray-300 text-left block md:table-cell">
+                            <span class="md:hidden font-bold text-blue-600">Alamat: </span>
+                            {{$item->address}}
                         </td>
 
                         <td class="p-2 md:border md:border-gray-300 text-left block md:table-cell break-all">
                             <span class="md:hidden font-bold text-blue-600">Isi: </span>
-                            Haloo min Izin melaporkan telah terjadi bencana dimana tiang listrik di daerah ***** (sebagai Conto…
+                           <p class="overflow-clip line-clamp-2">
+                            {{$item->isi_laporan}}
+                           </p>
                         </td>
 
                         <td class="p-2 md:border md:border-gray-300 text-left block md:table-cell font-semibold">
                             <span class="md:hidden font-bold text-blue-600">Status: </span>
-                            
                                 <span class="text-yellow-600 bg-yellow-100 px-3 py-1 rounded-full text-xs uppercase tracking-wider">Dalam Proses</span>
-                            
                         </td>
 
                         <td class="p-2 md:border md:border-gray-300 text-left block md:table-cell text-center">
@@ -69,6 +87,7 @@
                         </td>
                     </tr>
                 </tbody>
+                @endforeach
         </table>
     </div>
 </body>

@@ -10,22 +10,40 @@
 </head>
 <header >
     <nav class="bg-white text-black p-4 shadow-md">
-        <ul class="flex space-x-50 justify-center">
-            <li class="font-bold text-blue-400">Buat Laporan</li>
-            <a href="{{ route('laporan_saya') }}"><li class="font-semibold text-gray-500">Laporan Saya</li></a>
+    <div class="max-w-6xl mx-auto flex items-center justify-between">
+        <a href="{{ route('home') }}" class="hover:opacity-70 transition-opacity">
+            <i class="fa-solid fa-arrow-left text-xl text-blue-600"></i>
+        </a>
+        <ul class="flex items-center space-x-8 md:space-x-12">
+            <li>
+                <a href="#" class="font-bold text-blue-600 ">
+                    Buat Laporan
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('laporan_saya') }}" class="font-semibold text-gray-500 hover:text-blue-400 transition-colors">
+                    Laporan Saya
+                </a>
+            </li>
         </ul>
-    </nav>
+        <div class="w-6 hidden md:block"></div>
+    </div>
+</nav>
 </header>
 <body class="bg-gray-100">
     <h1 class="text-2xl font-semibold text-center mt-15">
         Halo <span class="font-bold text-blue-600 uppercase">{{ Auth::user()->name }}</span> Silahkan Laporkan Keluhkan anda
     </h1>
     <div class="bg-white max-w-6xl mx-auto mt-10 p-8 rounded-lg shadow-md mb-5">
-        <form action="#" method="POST" class="space-y-6 max-w-3xl mx-auto">
+       <form action="{{ route('laporan.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6 max-w-3xl mx-auto">
             @csrf
             <div class="">
-                <label for="date" class="block text-sm font-medium text-gray-700">Tanggal Laporan</label>
-                <input type="datetime-local" id="date" name="date" class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-blue-600" required>
+            <label for="date" class="block text-sm font-medium text-gray-700">Tanggal Laporan</label>
+            <input type="datetime-local" id="date" name="date" class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-blue-600" required>
+            </div>
+            <div class="">
+            <label for="date" class="block text-sm font-medium text-gray-700">Alamat Pelaporan</label>
+            <input type="name" id="address" name="address" class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-blue-600" required>
             </div>
             <div>
             <label for="isi_laporan" class="block text-sm font-medium text-gray-700">Isi Laporan</label>
@@ -42,7 +60,29 @@
                     <img id="image-preview" class="hidden h-full w-full object-contain rounded-lg p-2">
                     <input id="file-upload" name="gambar_bukti" type="file" class="hidden" accept="image/*">
                 </label>
-            </div>
+                <button class="bg-blue-600 text-white px-4 py-2 rounded font-bold hover:bg-blue-700  transition-colors mt-6" type="submit">
+                    Kirim Laporan
+                </button>
+         </div>
     </div>
 </body>
 </html>
+
+<script>
+    const fileUpload = document.getElementById('file-upload');
+    const imagePreview = document.getElementById('image-preview');
+    const previewContainer = document.getElementById('preview-container');
+
+    fileUpload.addEventListener('change', function() {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                imagePreview.src = e.target.result;
+                imagePreview.classList.remove('hidden');
+                previewContainer.classList.add('hidden');
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+</script>

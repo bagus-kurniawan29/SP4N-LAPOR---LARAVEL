@@ -22,7 +22,7 @@
         @yield('content')
     </main>
 
-    <div id="alert-container" class="fixed top-5 right-5 z-[999] flex flex-col gap-3">
+    <div id="alert-container" class="fixed top-5 right-5 z-999 flex flex-col gap-3">
         
         {{-- Alert Sukses --}}
         @if (session('success'))

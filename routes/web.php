@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\LaporanController;
 
 Route::get('/', function () {
     return view('index');
@@ -24,11 +25,11 @@ Route::middleware(['auth'])->group(function () {
         return view('laporan');
     })->name('laporan');
 
-    Route::get('/laporan_saya', function () {
-        return view('laporan_saya');
-    })->name('laporan_saya');
+    Route::get('/laporan_saya', [LaporanController::class, 'index'])->name('laporan_saya');
 
     Route::get('/laporan/detail', function () {
         return view('laporan_detail');
     })->name('laporan.detail');
 });
+
+Route::post('/laporan/store', [LaporanController::class, 'store'])->name('laporan.store');
