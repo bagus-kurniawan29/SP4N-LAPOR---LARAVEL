@@ -18,7 +18,7 @@
 </header>
 <body class="bg-gray-100">
     <h1 class="text-2xl font-semibold text-center mt-15">
-        Halo <span class="font-bold text-blue-600 uppercase">Nama Pengguna</span> Silahkan Laporkan Keluhkan anda
+        Halo <span class="font-bold text-blue-600 uppercase">{{ Auth::user()->name }}</span> Silahkan Laporkan Keluhkan anda
     </h1>
     <div class="bg-white max-w-6xl mx-auto mt-10 p-8 rounded-lg shadow-md mb-5">
         <form action="#" method="POST" class="space-y-6 max-w-3xl mx-auto">
