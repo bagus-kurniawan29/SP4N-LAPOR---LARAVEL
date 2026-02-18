@@ -15,4 +15,8 @@ class Laporan extends Model
         'isi_laporan',
         'gambar_bukti',
     ];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

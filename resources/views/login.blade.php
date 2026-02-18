@@ -18,7 +18,7 @@
     </section>
 
     <section class="flex-1 flex items-center justify-center p-8 w-full bg-gray-100 relative overflow-hidden">
-        <div class="absolute bg-linear-to-r h-80 w-100 from-blue-600 to-blue-900 -skew-y-6 sm:skew-y-0 sm:rotate-6 rounded-3xl shadow-lg opacity-20"></div>
+        <div class="absolute bg-linear-to-r h-80 w-100 from-blue-600 to-blue-900 -skew-y-6 sm:skew-y-0 sm:rotate-6 rounded-3xl shadow-lg"></div>
         
         <div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-md text-center relative z-10">
             <h1 class="text-2xl font-bold mb-6 text-gray-800">Masuk</h1>

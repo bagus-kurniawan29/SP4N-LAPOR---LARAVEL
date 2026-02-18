@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\AdminController;
 
 Route::get('/', function () {
     return view('index');
@@ -33,3 +34,4 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::post('/laporan/store', [LaporanController::class, 'store'])->name('laporan.store');
+Route::get('/admin/dashboard', [AdminController::class, 'index'])->middleware(['auth', 'admin']);

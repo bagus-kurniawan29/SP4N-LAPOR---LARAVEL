@@ -72,8 +72,8 @@
                         <td class="p-2 md:border md:border-gray-300 text-left block md:table-cell text-center">
                             <span class="md:hidden font-bold text-blue-600 block text-left">Bukti: </span>
                             
-                                <a href="/media/bukti_laporan/tewas-tertimpa-tiang-listrik-saat-naik-motor-800-2019-06-27-070915_0.jpg" target="_blank" class="inline-block">
-                                    <img src="/media/bukti_laporan/tewas-tertimpa-tiang-listrik-saat-naik-motor-800-2019-06-27-070915_0.jpg" alt="Bukti Laporan" class="w-16 h-16 object-cover rounded-lg border border-gray-200 hover:scale-110 transition-transform shadow-sm">
+                                <a href="/media/bukti_laporan/{{$item->bukti_laporan}}" target="_blank" class="inline-block">
+                                     <img src="/media/bukti_laporan/{{$item->bukti_laporan}}" alt="Bukti Laporan" class="w-16 h-16 object-cover rounded-lg border border-gray-200 hover:scale-110 transition-transform shadow-sm">
                                </a>
                         </td>
                         <td class="p-2 md:border md:border-gray-300 text-left block md:table-cell">
