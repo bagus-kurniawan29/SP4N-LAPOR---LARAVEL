@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ChatController;
 
 Route::get('/', function () {
     return view('index');
@@ -28,9 +29,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/laporan_saya', [LaporanController::class, 'index'])->name('laporan_saya');
 
-    Route::get('/laporan/detail', function () {
-        return view('laporan_detail');
-    })->name('laporan.detail');
+    Route::get('/laporan/detail/{id}', [LaporanController::class, 'show'])->name('laporan.detail');
+    Route::post('/laporan/detail/{id}', [ChatController::class, 'sendMessage'])->name('chat.send');
 });
 
 Route::post('/laporan/store', [LaporanController::class, 'store'])->name('laporan.store');

@@ -39,4 +39,15 @@ class LaporanController extends Controller
     
     return view('laporan_saya', compact('laporans'));
 }
+        public function showLaporan($id)
+    {
+        $laporan = Laporan::with('user', 'messages.user')->findOrFail($id);
+        return view('admin.laporan_detail', compact('laporan'));
+    }
+    public function show($id)
+{
+    $laporan = Laporan::with(['user', 'messages.user'])->findOrFail($id);
+    
+    return view('admin.laporan_detail', compact('laporan'));
+}
 }

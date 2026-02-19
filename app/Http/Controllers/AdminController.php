@@ -13,4 +13,9 @@ class AdminController extends Controller
     $allLaporans = Laporan::with('user')->latest()->get(); 
     return view('admin.dashboard', compact('allLaporans'));
 }
+    public function showLaporan($id)
+    {
+        $laporan = Laporan::with('user', 'messages.user')->findOrFail($id);
+        return view('admin.laporan_detail', compact('laporan'));
+    }
 }

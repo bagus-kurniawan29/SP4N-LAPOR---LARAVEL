@@ -19,4 +19,8 @@ class Laporan extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
 }
