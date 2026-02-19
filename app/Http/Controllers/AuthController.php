@@ -38,10 +38,15 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            return redirect()->intended('/laporan'); 
+     if (Auth::attempt($credentials)) {
+        $request->session()->regenerate();
+
+        if (Auth::user()->role === 'admin') {
+            return redirect()->intended('/admin/dashboard');
+        } else {
+            return redirect()->intended('/laporan');
         }
+    }
 
         return back()->with('error', 'Email atau Password salah! Silakan coba lagi.');
     }

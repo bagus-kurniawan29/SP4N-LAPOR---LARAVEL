@@ -18,8 +18,6 @@ class IsAdmin
     if (auth()->check() && auth()->user()->role == 'admin') {
         return $next($request);
     }
-
-    // Kalau bukan admin, lempar balik atau kasih error
     return redirect('/laporan')->with('error', 'Anda tidak punya akses ke halaman Admin!');
     }
 }
