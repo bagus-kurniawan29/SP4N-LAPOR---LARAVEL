@@ -5,21 +5,24 @@ namespace App\Http\Controllers;
 use App\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Broadcast;
+use App\Events\MessageSent;
 
 class ChatController extends Controller
 {
-    public function sendMessage(Request $request, $id)
-    {
-        $request->validate([
-            'message' => 'required'
-        ]);
+public function sendMessage(Request $request, $id)
+{
+    $request->validate([
+        'reply' => 'required',
+    ]);
 
-        Message::create([
-            'laporan_id' => $id,
-            'user_id' => Auth::id(),
-            'message' => $request->message,
-        ]);
+    $message = Message::create([
+        'laporan_id' => $id,
+        'user_id'    => auth()->id(),
+        'message'    => $request->reply,
+    ]);
+    broadcast(new MessageSent($message->load('user')))->toOthers();
 
-        return back()->with('success', 'Pesan terkirim!');
-    }
+    return back();
+}
 }

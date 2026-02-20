@@ -34,4 +34,4 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::post('/laporan/store', [LaporanController::class, 'store'])->name('laporan.store');
-Route::get('/admin/dashboard', [AdminController::class, 'index'])->middleware(['auth', 'admin']);
+Route::get('/admin/dashboard', [AdminController::class, 'index'])->middleware(['auth', 'admin'])->name('admin.laporan');

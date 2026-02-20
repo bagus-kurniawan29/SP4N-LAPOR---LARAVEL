@@ -21,7 +21,18 @@
             <li><a href="#">Layanan</a></li>
         </ul>
         <button>
-            <a href="{{ route('login') }}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-600 font-bold">Masuk</a>
+        @guest
+            <a href="{{ route('login') }}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 font-bold transition">
+                Masuk <i class="fa-sign-in-alt ml-3"></i>
+            </a>
+        @else
+           <form action="{{ route('logout') }}" method="POST" class="inline">
+        @csrf
+        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded font-bold hover:bg-blue-700 transition">
+        Keluar <i class="fas fa-right-to-bracket ml-3"></i>
+        </button>
+        </form>
+        @endauth
         </button>
     </nav>
 </header>
@@ -36,7 +47,15 @@
             </h1>
             <p class="text-xl text-gray-600 mt-6">Sampaikan laporan Anda dengan mudah dan transparan. Kami memastikan setiap suara didengar dan di tindaklanjuti</p>
             <button>
-                <a href="#" class="bg-blue-600 text-white px-4 py-4 rounded-xl hover:bg-blue-600 font-bold">Sampaikan Laporan</a>
+                @guest
+                <a href="{{ route('login') }}" class="bg-blue-600 text-white px-4 py-4 rounded-xl hover:bg-blue-600 font-bold">Sampaikan Laporan</a>
+                @else
+                @if(auth()->user()->role == 'admin')
+                <a href="{{ route('admin.laporan') }}" class="bg-blue-600 text-white px-4 py-4 rounded-xl hover:bg-blue-600 font-bold">Sampaikan Laporan</a>
+                @else
+                <a href="{{ route('laporan') }}" class="bg-blue-600 text-white px-4 py-4 rounded-xl hover:bg-blue-600 font-bold">Sampaikan Laporan</a>
+                @endif
+                @endauth
             </button>
         </div>
     </section>
@@ -140,9 +159,21 @@
             <p class="">Bergabunglah dengan ribuan warga yang telah menggunakan platform kami untuk membuat perubahan.</p>
         </div>
         <button class="mt-6 bg-white text-blue-600 font-bold py-3 px-8 rounded-full hover:bg-blue-50 transition duration-300 mt-6">
-            <a href="#">
+        @guest   
+        <a href="{{ route ('login') }}">
             Mulai Sekarang
             </a>
+        @else
+        @if(auth()->user()->role == 'admin')
+            <a href="{{ route ('admin.laporan') }}">
+            Mulai Sekarang
+            </a>
+        @else
+            <a href="{{ route ('laporan_saya') }}">
+                Mulai Sekarang
+            </a>
+        @endif
+        @endauth
         </button>
     </div>
 </section>

@@ -60,7 +60,7 @@
 <section class="bottom-0 bg-gray-100 p-4 fixed w-full mx-auto">
     <form action="{{ route('chat.send', $laporan->id) }}" method="POST" class="flex space-x-4 max-w-3xl mx-auto">
         @csrf
-        <input type="text" name="message" placeholder="Tulis balasan..." class="grow p-2 rounded-lg border border-gray-300 focus:outline-blue-600" required>
+        <input type="text" name="reply" placeholder="Tulis balasan..." class="grow p-2 rounded-lg border border-gray-300 focus:outline-blue-600" required>
         <button type="button">
             <i class="fas fa-camera text-blue-600"></i>
         </button>
@@ -72,20 +72,25 @@
 </body>
 
 <script type="module">
-    Echo.private('laporan.{{ $laporan->id }}')
-        .listen('MessageSent', (e) => {
-            const chatBox = document.getElementById('chat-box');
-            const isMe = e.user_id == {{ auth()->id() }};
-            
-            const newMessage = `
-                <section class="max-w-3xl mx-auto mt-5 flex ${isMe ? 'justify-end' : 'justify-start'}">
-                    <div class="max-w-xl p-4 shadow-sm ${isMe ? 'bg-blue-600 text-white rounded-t-2xl rounded-bl-2xl' : 'bg-white border rounded-t-2xl rounded-br-2xl'}">
-                        <p class="text-[10px] font-bold mb-1 uppercase opacity-70">${e.user_name}</p>
-                        <p class="text-sm">${e.message}</p>
-                    </div>
-                </section>`;
-            
-            chatBox.insertAdjacentHTML('beforeend', newMessage);
-            window.scrollTo(0, document.body.scrollHeight);
-        });
+    window.addEventListener('DOMContentLoaded', () => {
+        const currentUserId = {{ auth()->id() }};
+        const chatBox = document.getElementById('chat-box');
+
+        Echo.private(`laporan.{{ $laporan->id }}`)
+            .listen('MessageSent', (e) => {
+                const isMe = e.message.user_id === currentUserId;
+                
+                const newBubble = `
+                    <section class="max-w-3xl mx-auto mt-5 flex ${isMe ? 'justify-end' : 'justify-start'}">
+                        <div class="max-w-xl p-4 shadow-sm ${isMe ? 'bg-blue-600 text-white rounded-t-2xl rounded-bl-2xl' : 'bg-white border rounded-t-2xl rounded-br-2xl'}">
+                            <p class="text-[10px] font-bold mb-1 uppercase opacity-70">${e.message.user.name}</p>
+                            <p class="text-sm">${e.message.message}</p>
+                        </div>
+                    </section>
+                `;
+                
+                chatBox.insertAdjacentHTML('beforeend', newBubble);
+                window.scrollTo(0, document.body.scrollHeight);
+            });
+    });
 </script>
