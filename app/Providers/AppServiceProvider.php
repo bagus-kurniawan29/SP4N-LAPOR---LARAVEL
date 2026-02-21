@@ -17,8 +17,11 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
-    public function boot(): void
-    {
-        //
-    }
+public function boot(): void
+{
+   
+    \Illuminate\Support\Facades\Broadcast::routes();
+
+    require base_path('routes/channels.php');
+}
 }
